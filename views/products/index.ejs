@@ -1,0 +1,45 @@
+<h2>Szukaj produktów</h2>
+<form action="/products" method="GET">
+    <label>Index</label>
+    <input type="text" name="index" value="<%= searchOptions.index %>">
+    <button type="submit">Search</button>
+</form>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-info">
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Pieces in carton</th>
+            <th scope="col">Weight of Piece</th>
+            <th scope="col">Pieces on Pallet</th>
+            <th scope="col">Type of Packaging</th>
+            <th scope="col">Type of Carton</th>
+            <th scope="col">Akcja</th>
+
+
+        </tr>
+    </thead>
+
+
+    <% products.forEach(product => { %>
+    <tbody>
+        <tr class="table-light">>
+            <th scope="row"><%= product.index %></th>
+            <td><%= product.name %></td>
+            <td><%= product.piecesInCarton %></td>
+            <td><%= product.weightOfPiece %></td>
+            <td><%= product.piecesOnPallet %></td>
+            <td><%= product.typeOfPackaging %></td>
+            <td><%= product.typeOfCarton %></td>
+            <td>
+
+                <a class="btn btn-sm btn-success" href="/products/<%= product.id %>/edit">Edytuj</a>
+
+                <%- include('../partials/deleteForm',
+                  { url:`/products/${product.id}` }) %>
+
+            </td>
+    </tbody>
+    <% }) %>
+</table>
