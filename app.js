@@ -11,6 +11,8 @@ const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser')
 
+const mongoClient = require('mongo-client')
+
 const methodOverride = require('method-override')
 
 const app = express();
@@ -41,6 +43,8 @@ mongoose.connect(process.env.DATABASE_URL, {
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
+
+
 
 // EJS
 app.use(expressLayouts);
@@ -82,12 +86,17 @@ app.use('/users', require('./routes/users.js'));
 
 app.use('/productForm', require('./routes/productForm.js'));
 
+//app.use('/productionForm')
+
 //Method override
 app.use(methodOverride('_method'))
+
+// app.use(mongoClient)
 
 
 const productRouter = require('./routes/product') //testowy
 app.use('/products', productRouter)
+
 
 
 const PORT = process.env.PORT || 5000;
