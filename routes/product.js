@@ -1,16 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/product')
+const User = require('../models/User')
 
-const {
-    ensureAuthenticated,
-    forwardAuthenticated
-} = require('../config/auth');
-
-
-// All Products Route
-router.get('/', ensureAuthenticated, async (req, res) => {
+// All Products Route (Produkt)
+router.get('/', async (req, res) => {
     let searchOptions = {}
+
     if (req.query.index != null && req.query.index !== '') {
         searchOptions.index = new RegExp(req.query.index, 'i')
     }
@@ -27,14 +23,16 @@ router.get('/', ensureAuthenticated, async (req, res) => {
 })
 
 // New Product Route
-router.get('/new', ensureAuthenticated, (req, res) => {
+router.get('/new', (req, res) => {
+
     res.render('products/new', {
-        product: new Product()
+        product: new Product(),
+
     })
 })
 
 // Create Product Route
-router.post('/', ensureAuthenticated, async (req, res) => {
+router.post('/', async (req, res) => {
     const product = new Product({
         index: req.body.index,
         name: req.body.name,
@@ -43,26 +41,44 @@ router.post('/', ensureAuthenticated, async (req, res) => {
         piecesOnPallet: req.body.piecesOnPallet,
         typeOfPackaging: req.body.typeOfPackaging,
         typeOfCarton: req.body.typeOfCarton,
+        addDate: Date.now(),
+
+        recipe: {
+            elementA: req.body.elementA,
+            elementB: req.body.elementB,
+            elementC: req.body.elementC,
+            elementD: req.body.elementD
+        },
+
+        packingTimes: {
+            packingLineA: req.body.packingLineA,
+            packingLineB: req.body.packingLineB,
+            packingLineC: req.body.packingLineC
+        }
+
+
     })
     try {
         const newProduct = await product.save()
-        // res.redirect(`authors/${newAuthor.id}`)
+        console.info(newProduct);
         res.redirect(`products`)
     } catch {
+
         res.render('products/new', {
             product: product,
-            errorMessage: 'Error creating Product'
+            errorMessage: 'Blad dodawania produktu'
+
         })
+
     }
 })
 
 
 //+
-router.get('/:id', ensureAuthenticated, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
-        //   const books = await Book.find({ author: author.id }).limit(6).exec()
-        res.render('products/show', {
+        res.render('products', {
             product: product,
         })
     } catch {
@@ -71,7 +87,7 @@ router.get('/:id', ensureAuthenticated, async (req, res) => {
 })
 
 //+
-router.get('/:id/edit', ensureAuthenticated, async (req, res) => {
+router.get('/:id/edit', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
         res.render('products/edit', {
@@ -83,39 +99,15 @@ router.get('/:id/edit', ensureAuthenticated, async (req, res) => {
 })
 
 
-router.put('/:id', ensureAuthenticated, async (req, res) => {
-    let product
-    try {
-        product = await Product.findById(req.params.id)
-        product.index = req.body.index,
-            product.name = req.body.name,
-            product.piecesInCarton = req.body.piecesInCarton,
-            product.weightOfPiece = req.body.weightOfPiece,
-            product.piecesOnPallet = req.body.piecesOnPallet,
-            product.typeOfPackaging = req.body.typeOfPackaging,
-            product.typeOfCarton = req.body.typeOfCarton
 
-        await product.save()
-        res.redirect(`/products/${product.id}`)
-    } catch {
-        if (author == null) {
-            res.redirect('/')
-        } else {
-            res.render('products/edit', {
-                product: product,
-                errorMessage: 'Error updating Author'
-            })
-        }
-    }
-})
-
-
-router.delete('/:id', ensureAuthenticated, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     let product
 
     try {
         product = await Product.findById(req.params.id)
         await product.remove()
+        req.flash('success', 'Registration successfully');
+        res.locals.message = req.flash();
         res.redirect('/products')
     } catch {
         if (product == null) {
@@ -127,5 +119,40 @@ router.delete('/:id', ensureAuthenticated, async (req, res) => {
 })
 
 
+
+router.put('/:id', async (req, res) => {
+    let product
+    try {
+        product = await Product.findById(req.params.id)
+        // product.index = req.body.index,
+        product.name = req.body.name,
+            product.piecesInCarton = req.body.piecesInCarton,
+            product.weightOfPiece = req.body.weightOfPiece,
+            product.piecesOnPallet = req.body.piecesOnPallet,
+            product.typeOfPackaging = req.body.typeOfPackaging,
+            product.typeOfCarton = req.body.typeOfCarton,
+            product.recipe.elementA = req.body.elementA,
+            product.recipe.elementB = req.body.elementB,
+            product.recipe.elementC = req.body.elementC,
+            product.recipe.elementD = req.body.elementD,
+            product.packingTimes.packingLineA = req.body.packingLineA,
+            product.packingTimes.packingLineB = req.body.packingLineB,
+            product.packingTimes.packingLineC = req.body.packingLineC,
+
+            product.updateDate = Date.now()
+
+        await product.save()
+        res.redirect(`/products`)
+    } catch {
+        if (author == null) {
+            res.redirect('/')
+        } else {
+            res.render('/products', {
+                product: product,
+                errorMessage: 'Blad edytowania produktu'
+            })
+        }
+    }
+})
 
 module.exports = router

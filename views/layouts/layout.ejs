@@ -29,7 +29,24 @@
 
 
 
-  <%- include('../partials/header.ejs') %>
+  <%if(user){%>
+  <% switch (user.permission) {
+    case 'Administrator': %>
+  <%- include('../partials/headerADMIN.ejs') %>
+  <% break; %>
+  <% case 'Planista': %>
+  <%- include('../partials/headerPLAN.ejs') %>
+  <% break; %>
+  <% case 'Brygadzista': %>
+  <%- include('../partials/headerBRYG.ejs') %>
+  <% break; %>
+  <% default: %>
+  <%- include('../partials/headerGUEST.ejs') %>
+  <% break; %>
+  <% } %>
+  <%}%>
+
+
   <div class="container"><%- body %></div>
 
 

@@ -1,6 +1,24 @@
-<h2>Nowy produkt</h2>
+<h3>Nowy produkt</h3>
+
+
 <form action="/products" method="POST">
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="bs-component"></div>
+            <div class="form-group">
+
+
+                <button class="btn btn-primary btn-lg" style="width: 15em;" type="submit">Dodaj</button>
+                <a class="btn btn-danger btn-lg" style="width: 10em;" href="/products">Anuluj</a>
+            </div>
+
+        </div>
+    </div>
     <%- include('_form_fields') %>
-    <a href="/products">Cancel</a>
-    <button type="submit">Create</button>
 </form>

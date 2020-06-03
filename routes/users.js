@@ -5,17 +5,19 @@ const passport = require('passport');
 // Load User model
 const User = require('../models/User');
 const {
-  forwardAuthenticated
+  forwardAuthenticated,
+  ensureAuthenticated
 } = require('../config/auth');
 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login', {
-  layout: 'layouts/layoutUnlogged'
+router.get('/login', forwardAuthenticated, (req, res) => res.render('user/login', {
+  // layout: 'layouts/layoutUnlogged',
+  user: req.user
 }));
 
 // Register Page
-router.get('/register', forwardAuthenticated, (req, res) => res.render('register', {
-  layout: 'layouts/layoutUnlogged'
+router.get('/register', forwardAuthenticated, (req, res) => res.render('user/register', {
+  // layout: 'layouts/layoutUnlogged'
 }));
 
 // Register
@@ -47,7 +49,7 @@ router.post('/register', (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render('register', {
+    res.render('user/register', {
       errors,
       name,
       email,
@@ -62,7 +64,7 @@ router.post('/register', (req, res) => {
         errors.push({
           msg: 'Istnieje konto z takim adresem email'
         });
-        res.render('register', {
+        res.render('user/register', {
           errors,
           name,
           email,
@@ -112,5 +114,9 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'Wylogowano');
   res.redirect('/users/login');
 });
+
+
+
+
 
 module.exports = router;

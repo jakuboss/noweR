@@ -2,17 +2,18 @@ const mongoose = require('mongoose')
 
 const productOrderSchema = new mongoose.Schema({
     index: {
-        type: Number,
-        required: true
+        type: Number
     },
     name: {
-        type: Number,
-        required: true
+        type: Number
     },
     piecesInCarton: {
-        type: Number,
-        required: true
+        type: Number
     },
+    date: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports = mongoose.model('ProductOrder', productOrderSchema)

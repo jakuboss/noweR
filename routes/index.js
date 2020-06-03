@@ -6,7 +6,8 @@ const {
 } = require('../config/auth');
 
 // Welcome Page
-router.get('/', forwardAuthenticated, (req, res) => res.render('welcome', {
+router.get('/', forwardAuthenticated, (req, res) => res.render('user/welcome', {
+  // layout: 'layouts/layoutUnlogged'
 
 }));
 

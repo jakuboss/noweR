@@ -10,32 +10,33 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser')
-
 const mongoClient = require('mongo-client')
-
 const methodOverride = require('method-override')
-
 const app = express();
+const User = require('./models/User');
+const $ = require('jquery');
+const {
+  forwardAuthenticated,
+  ensureAuthenticated,
+  authenticationRole,
+
+} = require('./config/auth');
+const {
+  ROLE
+} = require('./data.js')
+
+//set the path of the jquery file to be used from the node_module jquery package
+app.use('/jquery', express.static(path.join(__dirname + '/node_modules/jquery/dist/')));
+
+
+app.use(express.json())
 
 app.use(express.static('public'));
 
-app.set('layout', 'layouts/layout')
+app.set('layout', 'layouts/layout') //
 app.set('views', __dirname + '/views')
 
-// Passport Config
 require('./config/passport')(passport);
-
-// DB Config
-//const db = require('./config/keys').mongoURI;
-
-// Connect to MongoDB
-// mongoose
-//   .connect(
-//     db,
-//     { useNewUrlParser: true }
-//   )
-//   .then(() => console.log('MongoDB Connected'))
-//   .catch(err => console.log(err));
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true
@@ -80,22 +81,33 @@ app.use(function (req, res, next) {
 });
 
 // Routes
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user
+  // res.locals.authenticated = !req.user.anonymous
+  next()
+})
+
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
 
 
-app.use('/productForm', require('./routes/productForm.js'));
+app.use('/profile', ensureAuthenticated, require('./routes/profile.js'))
 
-//app.use('/productionForm')
+app.use('/productForm', require('./routes/taskroute.js'));
 
-//Method override
+
 app.use(methodOverride('_method'))
 
-// app.use(mongoClient)
 
 
-const productRouter = require('./routes/product') //testowy
-app.use('/products', productRouter)
+app.use('/administration', ensureAuthenticated, require('./routes/administration'))
+
+
+
+app.use('/products', ensureAuthenticated, authenticationRole(ROLE.ADMIN), require('./routes/product'))
+
+// app.use('/roles', require('./routes/roles'))
 
 
 

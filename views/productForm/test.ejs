@@ -1,0 +1,100 @@
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.8.1/jquery.serializejson.min.js'>
+</script>
+
+<form id="app" data-apartments='[]' action='/productForm' method="POST">
+    <hr>
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-info">
+                <th scope="col">Index</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Cos</th>
+
+                <th> <button type="button" v-on:click="addNewApartment" class="btn btn-block btn-success">
+                        Dodaj
+                    </button></th>
+            </tr>
+        </thead>
+
+        <tbody v-for="(apartment, index) in apartments">
+            <tr class="table-light">
+
+                <th scope="row"><input v-model="apartment.price" type="number" name="apartments[0][index]"
+                        class="form-control" placeholder=></th>
+                <td><input v-model="apartment.rooms" type="number" name="apartments[0][cos]" class="form-control"></td>
+                <td><input v-model="apartment.cos" type="number" name="apartments[0][cos]" class="form-control"></td>
+                <td><button type="button" v-on:click="removeApartment(index)"
+                        class="btn btn-block btn-danger">Usuń</button></td>
+
+        </tbody>
+    </table>
+
+
+
+
+    <button class="btn btn-primary btn-lg" style="width: 15em;" type="submit">
+        Dodaj
+    </button>
+
+
+    <!-- <div class="row">
+        <div class="col-xs-2">
+            <button type="submit" v-on:click.prevent="submitForm" class="btn btn-block btn-primary">
+                Submit
+            </button>
+        </div>
+        <div class="col-xs-10">
+
+        </div>
+    </div> -->
+<hr>
+<pre>{{ $data }}</pre>
+
+</form>
+
+
+
+<script>
+    window.app = new Vue({
+        el: '#app',
+        data: {
+
+            apartments: [],
+        },
+        mounted: function () {
+
+            this.apartments = JSON.parse(this.$el.dataset.apartments)
+        },
+
+        methods: {
+            addNewApartment: function () {
+                this.apartments.push(Vue.util.extend({}, this.apartment))
+                console.info(this.apartments)
+            },
+            removeApartment: function (index) {
+                Vue.delete(this.apartments, index);
+            },
+            sumbitForm: function () {
+
+                db.products.update()
+
+                console.info('<< Form Submitted >>')
+                console.info('Vue.js apartments object:', this.apartments[0][price])
+                window.testSumbit()
+            }
+        }
+    })
+
+
+    window.testSumbit = function () {
+        if (!window.jQuery) {
+            console.warn('jQuery not present!')
+            return false
+        }
+        console.info(jQuery('form').serializeJSON())
+    }
+</script> -->

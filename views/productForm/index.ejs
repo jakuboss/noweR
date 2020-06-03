@@ -26,7 +26,7 @@
                                 class="form-control" placeholder=></th>
 
                         <td><input v-model="apartment.rooms" type="number" name="apartments[][rooms]"
-                                class="form-control" placeholder="Rooms"></td>
+                                class="form-control" value=<%-Date.now()%>></td>
                         <td><input v-model="apartment.cos" type="number" name="apartments[][cos]" class="form-control"
                                 placeholder="Cos"></td>
                         <td><button type="button" v-on:click="removeApartment(index)"
@@ -53,7 +53,16 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js'></script>
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.8.1/jquery.serializejson.min.js'>
     </script>
+    <script
+        src="https://raw.githubusercontent.com/marioizquierdo/jquery.serializeJSON/master/jquery.serializejson.js. ">
+    </script>
+
+
+
 
 
     <script>
@@ -69,14 +78,18 @@
                  */
                 this.apartments = JSON.parse(this.$el.dataset.apartments)
             },
+
             methods: {
                 addNewApartment: function () {
                     this.apartments.push(Vue.util.extend({}, this.apartment))
+                    console.info(this.apartments)
                 },
                 removeApartment: function (index) {
                     Vue.delete(this.apartments, index);
                 },
                 sumbitForm: function () {
+
+                    db.products.update(this.apartments)
 
                     console.info('<< Form Submitted >>')
                     console.info('Vue.js apartments object:', this.apartments)

@@ -6,8 +6,11 @@
                 <h3 class=" card-header">Nazwa produktu</h3>
                 <div class="card-body">
                     <div class="form-group ">
+
                         <label>Index</label>
-                        <input type="text" name="index" class="form-control" value="<%= product.index %>">
+                        <input class="form-control" id="readOnlyInput" type="text" placeholder=<%= product.index %>
+                            readonly="">
+
                     </div>
                     <div class="form-group">
                         <label>Nazwa</label>

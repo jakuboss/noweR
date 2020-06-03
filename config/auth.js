@@ -1,3 +1,22 @@
+const User = require('../models/User')
+
+function authenticationRole(role) {
+
+  return (req, res, next) => {
+
+    if (req.user.permission !== role) {
+      console.info(req.user.permission)
+      res.status(401)
+      return res.redirect(req.url)
+
+    }
+    next()
+  }
+}
+
+
+
+
 module.exports = {
   ensureAuthenticated: function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -11,5 +30,8 @@ module.exports = {
       return next();
     }
     res.redirect('/dashboard');
-  }
+  },
+  authenticationRole
+
+
 };

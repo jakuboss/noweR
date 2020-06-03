@@ -7,11 +7,13 @@
                 <div class="card-body">
                     <div class="form-group ">
                         <label>Index</label>
-                        <input type="text" name="index" class="form-control" value="<%= product.index %>">
+                        <input class="form-control" id="readOnlyInput" type="text" placeholder=<%= product.index %>
+                            readonly="">
                     </div>
                     <div class="form-group">
                         <label>Nazwa</label>
-                        <input type="text" name="name" class="form-control" value="<%= product.name %>">
+                        <input class="form-control" id="readOnlyInput" type="text" placeholder=<%= product.name %>
+                            readonly="">
                     </div>
                 </div>
             </div>
@@ -27,18 +29,18 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Wydajność linia A (szt/h)</label>
-                        <input type="number" name="packingLineA" class="form-control"
-                            value="<%= product.packingTimes.packingLineA %>">
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= product.packingTimes.packingLineA %> readonly="">
                     </div>
                     <div class="form-group">
                         <label>Wydajność linia B (szt/h)</label>
-                        <input type="number" name="packingLineB" class="form-control"
-                            value="<%= product.packingTimes.packingLineB %>">
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= product.packingTimes.packingLineB %> readonly="">
                     </div>
                     <div class="form-group">
                         <label>Wydajność linia C (szt/h)</label>
-                        <input type="number" name="packingLineC" class="form-control"
-                            value="<%= product.packingTimes.packingLineC %>">
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= product.packingTimes.packingLineC %> readonly="">
                     </div>
                 </div>
             </div>
@@ -52,23 +54,23 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Element A</label>
-                        <input type="number" name="elementA" class="form-control"
-                            value="<%= product.recipe.elementA %>">
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= product.recipe.elementA %> readonly="">
                     </div>
                     <div class="form-group">
                         <label>Element B</label>
-                        <input type="number" name="elementB" class="form-control"
-                            value="<%= product.recipe.elementB %>">
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= product.recipe.elementB %> readonly="">
                     </div>
                     <div class="form-group">
                         <label>Element C</label>
-                        <input type="number" name="elementC" class="form-control"
-                            value="<%= product.recipe.elementC %>">
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= product.recipe.elementC %> readonly="">
                     </div>
                     <div class="form-group">
                         <label>Element D</label>
-                        <input type="number" name="elementD" class="form-control"
-                            value="<%= product.recipe.elementD %>">
+                        <input class="form-control" id="readOnlyInput" readonly="" type="number"
+                            placeholder=<%= product.recipe.elementD %>>
                     </div>
                 </div>
             </div>
@@ -83,27 +85,27 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Sztuk w kartonie</label>
-                        <input type="number" name="piecesInCarton" class="form-control"
+                        <input type="number" name="piecesInCarton" class="form-control" id="readOnlyInput" readonly=""
                             value="<%= product.piecesInCarton %>">
                     </div>
                     <div class="form-group">
                         <label>Waga sztuki</label>
-                        <input type="number" name="weightOfPiece" class="form-control"
+                        <input type="number" name="weightOfPiece" class="form-control" id="readOnlyInput" readonly=""
                             value="<%= product.weightOfPiece %>">
                     </div>
                     <div class="form-group">
                         <label>Kartonów na palecie</label>
-                        <input type="number" name="piecesOnPallet" class="form-control"
+                        <input type="number" name="piecesOnPallet" class="form-control" id="readOnlyInput" readonly=""
                             value="<%= product.piecesOnPallet %>">
                     </div>
                     <div class="form-group">
                         <label>Rodzaj opakowania</label>
-                        <input type="number" name="typeOfPackaging" class="form-control"
+                        <input type="number" name="typeOfPackaging" class="form-control" id="readOnlyInput" readonly=""
                             value="<%= product.typeOfPackaging %>">
                     </div>
                     <div class="form-group">
                         <label>Rodzaj kartonu</label>
-                        <input type="number" name="typeOfCarton" class="form-control"
+                        <input type="number" name="typeOfCarton" class="form-control" id="readOnlyInput" readonly=""
                             value="<%= product.typeOfCarton %>">
                     </div>
                 </div>
