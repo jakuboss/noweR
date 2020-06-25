@@ -5,16 +5,13 @@ const {
   forwardAuthenticated
 } = require('../config/auth');
 
-// Welcome Page
+//wyświetlenie strony powitalnej
 router.get('/', forwardAuthenticated, (req, res) => res.render('user/welcome', {
-  // layout: 'layouts/layoutUnlogged'
-
 }));
 
-// Dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) =>
-  res.render('dashboard', {
-    user: req.user,
+router.get('/mainpage', ensureAuthenticated, (req, res) =>
+  res.render('mainPage', {
+    user: req.user
   })
 );
 

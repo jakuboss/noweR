@@ -1,4 +1,6 @@
+//model dla produktów
 const mongoose = require('mongoose')
+var Float = require('mongoose-float').loadType(mongoose);
 
 const productSchema = new mongoose.Schema({
     index: {
@@ -16,7 +18,7 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     weightOfPiece: {
-        type: Number,
+        type: Float,
         required: true
     },
     piecesOnPallet: {
@@ -24,11 +26,11 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     typeOfPackaging: {
-        type: Number,
+        type: String,
         required: true
     },
     typeOfCarton: {
-        type: Number,
+        type: String,
         required: true
     },
     packingTimes: {
@@ -44,16 +46,16 @@ const productSchema = new mongoose.Schema({
     },
     recipe: {
         elementA: {
-            type: Number
+            type: Float
         },
         elementB: {
-            type: Number
+            type: Float
         },
         elementC: {
-            type: Number
+            type: Float
         },
         elementD: {
-            type: Number
+            type: Float
         }
     },
     addDate: {
@@ -64,9 +66,6 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-
 })
-
-
 
 module.exports = mongoose.model('Product', productSchema)

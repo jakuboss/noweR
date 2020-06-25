@@ -1,0 +1,93 @@
+<!-- wszystkie zlecenia produkcyjne -->
+<form action="/productForm/orderList" method="GET">
+    <br>
+    <div class="row">
+        <div class="col-lg-8 ">
+
+            <table class="table table-hover table-striped ">
+                <thead>
+                    <tr class="table-info">
+                        <th>Numer zamówienia</th>
+                        <th>Linia prod.</th>
+                        <th>Data prod </th>
+                        <th>Nazwa produktu</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <input type="text" name="prodOrder" id="prodOrder" value="<%= searchOptions.prodOrder %>"
+                                class="form-control-sm">
+                        </td>
+
+                        <td>
+                            <select name="prodLine" id="prodLine" class="form-control-sm">
+                                <option value="">Wszystko</option>
+                                <option value="packingLineA">packingLineA</option>
+                                <option value="packingLineB">packingLineB</option>
+                                <option value="packingLineC">packingLineC</option>
+                            </select></td>
+                        </td>
+                        <td> <input type="date" name="prodDate" id="prodDate" value="<%= searchOptions.prodDate %>"
+                                class="form-control-sm">
+                        </td>
+                        <td>
+                            <select name="productName" id="productName" class="form-control-sm">
+                                <option value="">Wszystko</option>
+                                <% products.forEach(product => { %>
+                                <option label="<%= product.name %>" value="<%= product.name %>">
+                                    <% }) %>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="status" id="status" class="form-control-sm">
+                                <option value="">Wszystko</option>
+                                <option value="aktywny">Aktywny</option>
+                                <option value="zakonczony">Zakończony</option>
+
+                            </select></td>
+                        </td>
+                        <td> <button type=" submit" class="btn btn-primary btn-sm">Wyszukaj </button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
+
+<div class="row">
+    <div class="col-lg-12 ">
+        <table class="table table-hover table-striped ">
+            <thead>
+                <tr class="table-secondary">
+                    <th style="width: 15em;" scope="col">Status</th>
+                    <th style="width: 10em;" scope="col">Nr zamówienia</th>
+                    <th style="width: 15em;" scope="col">Linia produkcyjna</th>
+                    <th style="width: 15em;" scope="col">Data produkcji</th>
+                    <th style="width: 15em;" scope="col">Produkt</th>
+                    <th style="width: 15em;" scope="col">Zamówiona ilość</th>
+                    <th style="width: 15em;" scope="col">Zrealizowana ilość</th>
+                    <th> Akcja</th>
+                </tr>
+            </thead>
+            <% productorders.forEach(order => { %>
+            <tbody>
+                <tr class="table-light">
+                    <th scope="row"><%= order.status %></th>
+                    <th scope="row"><%= order.prodOrder %></th>
+                    <td><%= order.prodLine %></td>
+                    <td><%= order.prodDate %></td>
+                    <td><%= order.productName %></td>
+                    <td><%= order.orderQty %></td>
+                    <td><%= order.realQty %></td>
+                    <td>
+                        <div class="row">
+                            <a class="btn btn-sm btn-success" href="/productForm/<%= order.id %>/view">Pokaż</a>
+                        </div>
+                    </td>
+            </tbody>
+            <% }) %>
+        </table>
+    </div>
+</div>

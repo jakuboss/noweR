@@ -1,12 +1,17 @@
+//routing dodawanie, przegląd, edytowanie i usuwanie produktów
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/product')
-const User = require('../models/User')
 
-// All Products Route (Produkt)
-router.get('/', async (req, res) => {
+const {
+    authenticationRole
+} = require('../config/auth');
+const {
+    ROLE
+} = require('../data.js')
+
+router.get('/', authenticationRole([ROLE.PLAN, ROLE.ADMIN]), async (req, res) => {
     let searchOptions = {}
-
     if (req.query.index != null && req.query.index !== '') {
         searchOptions.index = new RegExp(req.query.index, 'i')
     }
@@ -15,7 +20,24 @@ router.get('/', async (req, res) => {
         res.render('products/index', {
             products: products,
             searchOptions: req.query,
-            //layout: 'layouts/layoutLogged'
+        })
+    } catch {
+        res.redirect('/')
+    }
+})
+
+
+
+router.get('/indexView', async (req, res) => {
+    let searchOptions = {}
+    if (req.query.index != null && req.query.index !== '') {
+        searchOptions.index = new RegExp(req.query.index, 'i')
+    }
+    try {
+        const products = await Product.find(searchOptions)
+        res.render('products/indexView', {
+            products: products,
+            searchOptions: req.query,
         })
     } catch {
         res.redirect('/')
@@ -23,7 +45,7 @@ router.get('/', async (req, res) => {
 })
 
 // New Product Route
-router.get('/new', (req, res) => {
+router.get('/new', authenticationRole([ROLE.PLAN, ROLE.ADMIN]), (req, res) => {
 
     res.render('products/new', {
         product: new Product(),
@@ -32,7 +54,7 @@ router.get('/new', (req, res) => {
 })
 
 // Create Product Route
-router.post('/', async (req, res) => {
+router.post('/', authenticationRole([ROLE.PLAN, ROLE.ADMIN]), async (req, res) => {
     const product = new Product({
         index: req.body.index,
         name: req.body.name,
@@ -55,21 +77,16 @@ router.post('/', async (req, res) => {
             packingLineB: req.body.packingLineB,
             packingLineC: req.body.packingLineC
         }
-
-
     })
     try {
         const newProduct = await product.save()
         console.info(newProduct);
         res.redirect(`products`)
     } catch {
-
         res.render('products/new', {
             product: product,
             errorMessage: 'Blad dodawania produktu'
-
         })
-
     }
 })
 
@@ -78,7 +95,8 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
-        res.render('products', {
+        console.log(product)
+        res.render('products/read', {
             product: product,
         })
     } catch {
@@ -86,8 +104,22 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/indexView/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id)
+        console.log(product)
+        res.render('products/read_bryg', {
+            product: product,
+        })
+    } catch {
+        res.redirect('/')
+    }
+})
+
+
+
 //+
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', authenticationRole([ROLE.PLAN, ROLE.ADMIN]), async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
         res.render('products/edit', {
@@ -100,7 +132,7 @@ router.get('/:id/edit', async (req, res) => {
 
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticationRole([ROLE.PLAN, ROLE.ADMIN]), async (req, res) => {
     let product
 
     try {
@@ -118,9 +150,7 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-
-
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticationRole([ROLE.PLAN, ROLE.ADMIN]), async (req, res) => {
     let product
     try {
         product = await Product.findById(req.params.id)

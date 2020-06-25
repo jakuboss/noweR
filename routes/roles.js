@@ -1,16 +1,16 @@
-const express = require('express')
-const router = express.Router()
-const User = require('../models/User')
+// const express = require('express')
+// const router = express.Router()
+// const User = require('../models/User')
 
-const ROLE = {
-    ADMIN: 'admin',
-    BASIC: 'basic'
-}
+// const ROLE = {
+//     ADMIN: 'admin',
+//     BASIC: 'basic'
+// }
 
-const users = await User.find()
+// const users = await User.find()
 
-module.exports = {
-    ROLE: ROLE,
-    users: users, //[],
-    projects: []
-}
+// module.exports = {
+//     ROLE: ROLE,
+//     users: users, //[],
+//     projects: []
+// }

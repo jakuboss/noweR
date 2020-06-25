@@ -1,9 +1,10 @@
+//zarządznie profilem routing
 const express = require('express');
 const router = express.Router();
-
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/User');
+
 
 router.get('/', (req, res) =>
     res.render('profile/profile', {
@@ -16,8 +17,6 @@ router.get('/newpassword', (req, res) => {
         user: req.user
     })
 })
-
-
 
 router.post('/newpassword', (req, res, next) => {
 

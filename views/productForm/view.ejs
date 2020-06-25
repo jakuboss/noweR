@@ -1,0 +1,134 @@
+<!-- podgląd szczegółów zlecenia zlecenia - view -->
+
+<br>
+
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="bs-component">
+            <div class=" card border-primary mb-3" style="max-width: 67.5rem;">
+                <h4 class=" card-header border-primary">Realizacja na produkcji:
+                    <b><%= productorders.productName %></b>
+                </h4>
+                <div class="  card-body">
+                    <table>
+                        <tr>
+                            <td>Wyprodukowano</td>
+                            <td>Czas produkcji</td>
+                            <td>Sekwencja</td>
+                            <td>Linia produkcyjna</td>
+                            <td>Nr zamówienia</td>
+                            <td>Data produkcji</td>
+
+                        </tr>
+                        <tr>
+                            <td> <input type="text" class=" form-control-sm" style="max-width: 20rem;"
+                                    placeholder=<%= productorders.realQty %>></td>
+                            <td> <input type="text" class=" form-control-sm" style="max-width: 20rem;"
+                                    placeholder=<%= productorders.realProdTime %>></td>
+
+                            <td> <input type="text" class=" form-control-sm" style="max-width: 20rem;"
+                                    placeholder=<%= productorders.sequence %>></td>
+                            <td> <input type="text" class=" form-control-sm" style="max-width: 20rem;"
+                                    placeholder=<%= productorders.prodLine %>></td>
+                            <td> <input type="text" class=" form-control-sm" style="max-width: 20rem;"
+                                    placeholder=<%= productorders.prodOrder %>></td>
+                            <td> <input type="text" class=" form-control-sm" style="max-width: 20rem;"
+                                    placeholder=<%= productorders.prodDate %>></td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="bs-component">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <h4 class="card-header">Zamówione ilości</h4>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Liczba sztuk</label>
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= productorders.orderQty %> readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Waga</label>
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= productorders.orderWeight %> readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Kartony</label>
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= productorders.cartonQty %> readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Palety</label>
+                        <input class="form-control" id="readOnlyInput" type="number"
+                            placeholder=<%= productorders.palletQty %> readonly="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-4">
+        <div class="bs-component">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <h4 class=" card-header">Zużycie materiałów</h4>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Zużycie A</label>
+                        <input class="form-control" id="readOnlyInput" type="float"
+                            placeholder=<%= productorders.useOfA %> readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Zużycie B</label>
+                        <input class="form-control" id="readOnlyInput" type="float"
+                            placeholder=<%= productorders.useOfB %> readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Zużycie C</label>
+                        <input class="form-control" id="readOnlyInput" type="float"
+                            placeholder=<%= productorders.useOfC %> readonly="">
+                    </div>
+                    <div class="form-group">
+                        <label>Zużycie D</label>
+                        <input class="form-control" id="readOnlyInput" readonly="" type="float"
+                            placeholder=<%= productorders.useOfD %>>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="bs-component">
+            <div class="card border-primary mb-3" style="max-width: 20rem;">
+                <h4 class=" card-header">Planowany czas produkcji</h4>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Czas produkcji</label>
+                        <input class="form-control" id="readOnlyInput" type="text"
+                            placeholder=<%= productorders.planProdTime %> readonly="">
+                    </div>
+                    <div class="form-group ">
+                        <label>Start</label>
+                        <input class="form-control" id="readOnlyInput" type="text"
+                            placeholder=<%= productorders.planPartStart %> readonly="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-row form-row-end btn-row">
+    <a class="btn btn-danger" href="/productForm/orderList">Cofnij</a>
+
+</div>

@@ -1,4 +1,4 @@
-<!-- lista produktów - view-->
+<!-- lista produktów - view brygadzista-->
 
 <%- include('_search_form.ejs') %>
 
@@ -24,14 +24,10 @@
 
                     <td>
                         <div class="row">
-                            <a class="btn btn-sm btn-info" href="/products/<%= product.id %>"
+                            <a class="btn btn-sm btn-info" href="/products/indexView/<%= product.id %>"
                                 style="margin-right: 0.25rem ;">Pokaż</a>
 
-                            <a class="btn btn-sm btn-success" href="/products/<%= product.id %>/edit"
-                                style="margin-right: 0.25rem ;">Edytuj</a>
 
-                            <%- include('../partials/deleteForm',
-                  { url:`/products/${product.id}` }) %>
 
                         </div>
                     </td>

@@ -1,3 +1,4 @@
+//logowanie i rejestracja routing
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -102,7 +103,7 @@ router.post('/register', (req, res) => {
 // Login
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/mainpage',
     failureRedirect: '/users/login',
     failureFlash: true
   })(req, res, next);
@@ -114,9 +115,5 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'Wylogowano');
   res.redirect('/users/login');
 });
-
-
-
-
 
 module.exports = router;

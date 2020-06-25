@@ -1,10 +1,9 @@
 const User = require('../models/User')
-
 function authenticationRole(role) {
-
   return (req, res, next) => {
 
-    if (req.user.permission !== role) {
+    if (!
+      role.some(x => x == req.user.permission)) {
       console.info(req.user.permission)
       res.status(401)
       return res.redirect(req.url)
@@ -13,10 +12,6 @@ function authenticationRole(role) {
     next()
   }
 }
-
-
-
-
 module.exports = {
   ensureAuthenticated: function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -29,7 +24,7 @@ module.exports = {
     if (!req.isAuthenticated()) {
       return next();
     }
-    res.redirect('/dashboard');
+    res.redirect('mainpage');
   },
   authenticationRole
 

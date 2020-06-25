@@ -1,41 +1,28 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load()
 }
-
+//wymagane moduy/biblioteki
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const path = require('path');
-const bodyParser = require('body-parser')
-const mongoClient = require('mongo-client')
 const methodOverride = require('method-override')
 const app = express();
-const User = require('./models/User');
 const $ = require('jquery');
 const {
-  forwardAuthenticated,
   ensureAuthenticated,
   authenticationRole,
-
 } = require('./config/auth');
 const {
   ROLE
 } = require('./data.js')
 
-//set the path of the jquery file to be used from the node_module jquery package
-app.use('/jquery', express.static(path.join(__dirname + '/node_modules/jquery/dist/')));
-
-
 app.use(express.json())
-
 app.use(express.static('public'));
-
 app.set('layout', 'layouts/layout') //
 app.set('views', __dirname + '/views')
-
 require('./config/passport')(passport);
 
 mongoose.connect(process.env.DATABASE_URL, {
@@ -44,8 +31,6 @@ mongoose.connect(process.env.DATABASE_URL, {
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
-
-
 
 // EJS
 app.use(expressLayouts);
@@ -72,44 +57,28 @@ app.use(passport.session());
 // Connect flash
 app.use(flash());
 
-// Global variables
+// Zmienne globalne
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.user = req.user;
   next();
 });
 
-// Routes
-
-app.use(function (req, res, next) {
-  res.locals.user = req.user
-  // res.locals.authenticated = !req.user.anonymous
-  next()
-})
-
+//Routing
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
 
-
 app.use('/profile', ensureAuthenticated, require('./routes/profile.js'))
 
-app.use('/productForm', require('./routes/taskroute.js'));
-
+app.use('/productForm', ensureAuthenticated, require('./routes/taskroute.js'));
 
 app.use(methodOverride('_method'))
 
+app.use('/administration', ensureAuthenticated, authenticationRole([ROLE.ADMIN]), require('./routes/administration'))
 
-
-app.use('/administration', ensureAuthenticated, require('./routes/administration'))
-
-
-
-app.use('/products', ensureAuthenticated, authenticationRole(ROLE.ADMIN), require('./routes/product'))
-
-// app.use('/roles', require('./routes/roles'))
-
-
+app.use('/products', ensureAuthenticated, require('./routes/product'))
 
 const PORT = process.env.PORT || 5000;
 

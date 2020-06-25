@@ -7,22 +7,55 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item">
-                <a class="nav-link" href="/products">Produkt</a>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-primary">Produkty</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="/products">Lista produktów</a>
+                            <a class="dropdown-item" href="/products/new">Dodaj Produkt</a>
+
+                        </div>
+                    </div>
+                </div>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="/products/new">Dodaj Produkt</a>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-primary">Zlecenia produkcyjne</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="/productForm">Dodaj zamówienie produkcyjne</a>
+                            <a class="dropdown-item" href="/productForm/orderList">Lista zleceń </a>
+                        </div>
+                    </div>
+                </div>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="/productForm">Dodaj zamówienie produkcyjne</a>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-primary">Profil</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="/profile">Edytuj profil</a>
+                            <a class="dropdown-item" href="/profile/newpassword">Zmień hasło </a>
+                        </div>
+                    </div>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile/">Profil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/administration/">Admin</a>
-            </li>
+
+
+
         </ul>
         <a href="/users/logout" class="btn btn-secondary">Wyloguj</a>
     </div>
+
+
 </nav>

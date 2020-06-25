@@ -1,3 +1,4 @@
+//role użytkowników
 const ROLE = {
     ADMIN: "Administrator",
     PLAN: "Planista",

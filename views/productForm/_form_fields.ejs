@@ -1,0 +1,46 @@
+<br>
+<div class="row">
+    <div class="col-lg-8 ">
+
+        <table class="table table-hover table-striped ">
+            <thead>
+                <tr class="table-info">
+                    <th>Numer zamówienia</th>
+                    <th>Linia prod.</th>
+                    <th>Data prod </th>
+                    <th>Nazwa produktu</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> <input type="text" name="prodOrder" id="prodOrder" value="<%= searchOptions.prodOrder %>"
+                            class="form-control-sm">
+                    </td>
+
+                    <td>
+                        <select name="prodLine" id="prodLine" class="form-control-sm">
+                            <option value="">Wszystko</option>
+                            <option value="packingLineA">packingLineA</option>
+                            <option value="packingLineB">packingLineB</option>
+                            <option value="packingLineC">packingLineC</option>
+                        </select></td>
+                    </td>
+                    <td> <input type="date" name="prodDate" id="prodDate" value="<%= searchOptions.prodDate %>"
+                            class="form-control-sm">
+                    </td>
+                    <td>
+                        <select name="productName" id="productName" class="form-control-sm">
+                            <option value="">Wszystko</option>
+                            <% products.forEach(product => { %>
+                            <option label="<%= product.name %>" value="<%= product.name %>">
+                                <% }) %>
+                        </select>
+                    </td>
+                    <td> <button type=" submit" class="btn btn-primary btn-sm" class="form-control-sm">Wyszukaj
+                        </button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

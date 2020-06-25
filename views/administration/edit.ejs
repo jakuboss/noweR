@@ -1,6 +1,6 @@
+<!-- edycja ról użytkowników - admin view -->
 <h2 class="page-header">Edytuj uprawnienia</h2>
 <form action="/administration/<%= users.id %>?_method=PUT" method="POST">
-
     <div>
         <h2><%= users.email %></h2>
         <div class="form-group">
@@ -10,13 +10,9 @@
                 <option>Administrator</option>
                 <option>Planista</option>
                 <option>Brygadzista</option>
-
             </select>
-
         </div>
-
     </div>
-
     <div class="form-row form-row-end btn-row">
         <a class="btn btn-danger" href="/administration">Anuluj</a>
         <button class="btn btn-primary" type="submit">Update</button>

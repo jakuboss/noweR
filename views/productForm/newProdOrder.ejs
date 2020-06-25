@@ -1,0 +1,220 @@
+<!-- nowe zlecenie prod view -->
+<style>
+    .greyCol {
+        background-color: lightgrey;
+
+    }
+
+    td.hide {
+        display: none;
+    }
+</style>
+
+<br>
+
+<div class="row">
+    <div class="col-lg-12">
+        <form name="cart">
+            <div style="max-width: 70rem;">
+                <table class="table table-striped" style="max-width: fit-content;">
+                    <thead>
+
+                        <tr class="table-info">
+                            <th>Numer zamówienia</td>
+                            <th>Linia produkcyjna</th>
+                            <th>Data </th>
+                            <th>Godzina rozpoczęcia</th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="min-width: 10rem;"> <input type="text" id="prodOrder" class="form-control-sm">
+                            </td>
+                            <td>
+                                <select name="lineSelect" id="lineSelect" style="min-width: 10rem;"
+                                    class="form-control-sm">
+                                    <option value="" disabled selected>Wybierz linię</option>
+                                    <option value="packingLineA">packingLineA</option>
+                                    <option value="packingLineB">packingLineB</option>
+                                    <option value="packingLineC">packingLineC</option>
+                                </select></td>
+                            <td> <input type="date" id="prodDate" class="form-control-sm" style="min-width: 10rem;">
+                            </td>
+                            <td> <input type="time" id="getStart" name="getStart" style="min-width: 10rem;"
+                                    class="form-control-sm"></td>
+                            <td><button id="workHourCalc" class="btn btn-primary btn" name="workHourCalc">Kalulacja
+                                    godzin pracy
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table name="cart" class="table table-striped table-bordered ">
+                <thead>
+                    <tr id="headerHandle" class="table-primary">
+                        <th>&nbsp;</th>
+                        <th>Kol.</th>
+                        <th>Produkt</th>
+                        <th>Zamówiona ilość</th>
+                        <th>Waga</th>
+                        <th>Liczba kartonów</th>
+                        <th>Liczba palet</th>
+                        <th>Czas </th>
+                        <th>Planowany start</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_posts_body">
+                    <tr name="line_items">
+                        <td style="min-width:  5rem;"></td>
+                        <td class="sn" id="PO_1" style="max-width: 2rem;">1</td>
+                        <td>
+
+                            <select name="changeSelect" id="product_1" class="product form-control-sm">
+                                <option value="" disabled selected>Wybierz produkt</option>
+
+                                <% product.forEach(author => { %>
+
+                                <option data-id2="<%= author.name %>" label="<%= author.name %>"
+                                    value="<%= author.id %>">
+
+                                    <% }) %>
+
+                            </select>
+                        </td>
+                        <td><input type="text" name="qty" value="" id='qty_1' class="qty form-control-sm"
+                                style="max-width: 8rem;">
+                        </td>
+
+                        <td><input class="pieceWeight form-control-sm" id="pieceWeight_1" type="text" name="pieceWeight"
+                                value="" readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td><input class="cartonQty form-control-sm" id="cartonQty_1" type="text" name="cartonQty"
+                                value="" readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td class="hide"><input class="useOfA" id="useOfA_1" type="text" name="useOfA" value=""
+                                readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td class="hide"><input class="useOfB" id="useOfB_1" type="text" name="useOfB" value=""
+                                readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td class="hide"><input class="useOfC" id="useOfC_1" type="text" name="useOfC" value=""
+                                readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td class="hide"><input class="useOfD" id="useOfD_1" type="text" name="useOfD" value=""
+                                readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td><input class="palletNum form-control-sm" id="palletNum_1" type="text" name="palletNum"
+                                value="" readonly="" style="max-width: 8rem;">
+                        </td>
+
+                        <td><input class="prodTime form-control-sm" id="prodTime_1" type="text" name="prodTime" value=""
+                                readonly="" style="max-width: 8rem;">
+                        </td>
+                        <td><input class="planStart form-control-sm" id="planStart_1" type="text" name="planStart"
+                                value="" readonly="" style="max-width: 8rem;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><button name="add" class="btn btn-primary">Dodaj wiersz</button></td>
+
+
+                        <td colspan="50"><button name="confirm" class="btn btn-primary">Zatwierdź</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card border-primary mb-3" style="max-width: 50rem;">
+                <table class="table  table-hover">
+                    <tr>
+
+
+                        <td>Łączna waga (kg)</td>
+
+                        <td><input type="text" name="sub_total" value="0" id="totalWeight" readonly="">
+                        </td>
+                        <td>Łączne zużycie A</td>
+
+                        <td><input type="text" name="elA_total" value="0" readonly="" id="totalA"></td>
+
+                    <tr>
+
+                        <td>Liczba kartonów (szt)</td>
+                        <td><input type="text" name="carton_total" value="0" readonly="" id="totalCartons">
+                        </td>
+                        <td>Łączne zużycie B</td>
+                        <td><input type="text" name="elB_total" value="0" readonly="" id="totalB"></td>
+                    </tr>
+
+                    <tr>
+
+                        <td>Liczba palet (szt)</td>
+                        <td><input type="text" name="pallet_total" value="0" readonly="" id="totalPallets">
+                        </td>
+                        <td>Łączne zużycie C</td>
+                        <td><input type="text" name="elC_total" value="0" readonly="" id="totalC"></td>
+                    </tr>
+
+                    <tr>
+
+                        <td>Czas produkcji</td>
+                        <td><input type="text" name="time_total" value="0" readonly="" id="totalTime"></td>
+                        <td>Łączne zużycie D</td>
+                        <td><input type="text" name="elD_total" value="0" readonly="" id="totalD"></td>
+                    </tr>
+                    <tr>
+                        <td>Planowany koniec</td>
+                        <td><input type="text" name="prodEnd" value="0" readonly="" id="prodEnd"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </form>
+    </div>
+</div>
+<div style="display: none;">
+    <table id="sample_table" name="line_items">
+        <div style="display: none;">
+            <tr name="line_items" id="rowModel">
+                <td><button name="remove" class="btn btn-danger delete-record" data-id="0">Usuń</button></td>
+                <td class="sn" id="" style="max-width: 2rem;"></td>
+                <td>
+
+                    <select id="" type="button" class="namesWrapper product form-control-sm" name='changeSelect'>
+                        <option value="" disabled selected>Wybierz produkt</option>
+                        <% product.forEach(author => { %>
+                        <option label="<%= author.name %>" value="<%= author.id %>" data-id2="<%= author.name %>">
+                            <% }) %>
+                    </select>
+                </td>
+                <td><input type="text" name="qty" value="" id="" class='qty form-control-sm' style="max-width: 8rem;">
+                </td>
+                <td><input class="pieceWeight form-control-sm" id="" type="text" name="pieceWeight" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td><input class="cartonQty form-control-sm" id="" type="text" name="cartonQty" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td class="hide"><input class="useOfA" id="" type="text" name="useOfA" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td class="hide"><input class="useOfB" id="" type="text" name="useOfB" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td class="hide"><input class="useOfC" id="" type="text" name="useOfC" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td class="hide"><input class="useOfD" id="" type="text" name="useOfD" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td><input class="palletNum form-control-sm" id="" type="text" name="palletNum" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td><input class="prodTime form-control-sm" id="" type="text" name="prodTime" value="" readonly=""
+                        style="max-width: 8rem;"></td>
+                <td><input class="planStart form-control-sm" id="" type="text" name="planStart" value="" readonly=""
+                        style="max-width: 8rem;">
+                </td>
+            </tr>
+        </div>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+
+</script>

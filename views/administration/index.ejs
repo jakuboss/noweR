@@ -1,7 +1,6 @@
+<!-- przegląd użytkowników - admin view -->
 <h2>Przegląd użytkowników</h2>
 <form action="/administration" method="GET">
-
-
     <div class="row">
         <div class="col-lg-4 ">
             <div class="bs-component">
@@ -15,14 +14,7 @@
             </div>
         </div>
     </div>
-
 </form>
-
-
-
-
-
-
 
 <div class="row">
     <div class="col-lg-12 ">
@@ -44,11 +36,11 @@
                     <td><%=user.name%></td>
                     <td><%=user.date%></td>
                     <td><%= user.permission %></td>
-
                     <td>
                         <div class="row">
 
-                            <a class="btn btn-sm btn-success" href="/administration/<%= user.id %>/edit">Edytuj</a>
+                            <a class="btn btn-sm btn-success" href="/administration/<%= user.id %>/edit"
+                                style="margin-right: 0.25rem;">Edytuj</a>
                             <%- include('../partials/deleteForm',
                     { url:`/administration/${user.id}` }) %>
                         </div>

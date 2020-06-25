@@ -1,9 +1,126 @@
-<h2 class="page-header">Edytuj produkt</h2>
+<!-- edycja produktu view -->
+<h3 class="page-header">Edytuj <%= product.name %></h3>
 <form action="/products/<%= product.id %>?_method=PUT" method="POST">
-    <%- include('_form_fields_edit') %>
+    <div class="row">
+
+        <div class="col-lg-12 ">
+            <div class="bs-component">
+                <div class="card border-primary mb-3" style="max-width: 67.5rem;">
+                    <h3 class=" card-header">Nazwa produktu</h3>
+                    <div class="card-body">
+                        <div class="form-group ">
+
+                            <label>Index</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder=<%= product.index %>
+                                readonly="">
+
+                        </div>
+                        <div class="form-group">
+                            <label>Nazwa</label>
+                            <input type="text" name="name" class="form-control" value="<%= product.name %>" readonly="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div class="bs-component">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <h3 class="card-header">Wydajność produkcji</h3>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Wydajność linia A (sec/szt)</label>
+                            <input type="number" name="packingLineA" class="form-control"
+                                value="<%= product.packingTimes.packingLineA %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Wydajność linia B (sec/szt)</label>
+                            <input type="number" name="packingLineB" class="form-control"
+                                value="<%= product.packingTimes.packingLineB %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Wydajność linia C (sec/szt)</label>
+                            <input type="number" name="packingLineC" class="form-control"
+                                value="<%= product.packingTimes.packingLineC %>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="bs-component">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <h3 class=" card-header">Specyfikacja produktu</h3>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Element A</label>
+                            <input type="float" name="elementA" class="form-control"
+                                value="<%= product.recipe.elementA %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Element B</label>
+                            <input type="float" name="elementB" class="form-control"
+                                value="<%= product.recipe.elementB %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Element C</label>
+                            <input type="float" name="elementC" class="form-control"
+                                value="<%= product.recipe.elementC %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Element D</label>
+                            <input type="float" name="elementD" class="form-control"
+                                value="<%= product.recipe.elementD %>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4 ">
+            <div class="bs-component">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <h3 class="card-header">Logistyka pakowania</h3>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Sztuk w kartonie</label>
+                            <input type="number" name="piecesInCarton" class="form-control"
+                                value="<%= product.piecesInCarton %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Waga sztuki</label>
+                            <input type="float" name="weightOfPiece" class="form-control"
+                                value="<%= product.weightOfPiece %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Kartonów na palecie</label>
+                            <input type="number" name="piecesOnPallet" class="form-control"
+                                value="<%= product.piecesOnPallet %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Rodzaj opakowania</label>
+                            <input type="text" name="typeOfPackaging" class="form-control"
+                                value="<%= product.typeOfPackaging %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Rodzaj kartonu</label>
+                            <input type="text" name="typeOfCarton" class="form-control"
+                                value="<%= product.typeOfCarton %>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="form-row form-row-end btn-row">
         <a class="btn btn-danger" href="/products">Anuluj</a>
-        <button class="btn btn-primary" type="submit">Aktualizuj</button>
+        <button class="btn btn-primary" type="submit" style="margin-left: 0.25rem;">Aktualizuj</button>
 
     </div>
 </form>

@@ -1,0 +1,41 @@
+<!-- edycja zlecenia dla brygadzisty - view -->
+<form action="/productForm/<%= productorders.id %>" method="POST">
+    <br>
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="bs-component">
+                <div class=" card border-primary mb-3" style="max-width: 67.5rem;">
+                    <h4 class=" card-header border-primary"><%= productorders.productName %></h4>
+                    <div class="  card-body">
+                        <table>
+                            <tr>
+                                <td>Wykonana ilość (szt.)</td>
+                                <td>Faktyczny czas pracy</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr>
+                                <td> <input name="realQty" id="realQty" type="text" class="form-control-sm "
+                                        style="max-width: 20rem;" placeholder=<%= productorders.realQty %>></td>
+                                <td> <input name="realProdTime" id="realProdTime" type="text" class=" form-control-sm"
+                                        style="max-width: 20rem;" placeholder=<%= productorders.realProdTime %>></td>
+                                <td>
+                                    <select name="status" id="status" class=" form-control-sm"
+                                        style="max-width: 20rem;">
+                                        <option value="aktywny">Atywny</option>
+                                        <option value="zakonczony">Zakończony</option>
+                                    </select></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('_formfields_edit') %>
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-danger" href="/productForm/active">Cofnij</a>
+
+        <button class="btn btn-primary" type="submit" style="margin-left: 0.25rem;">Aktualizuj</button>
+    </div>
+</form>

@@ -1,19 +1,89 @@
+//model dla zleceń produkcyjnych
 const mongoose = require('mongoose')
+var Float = require('mongoose-float').loadType(mongoose);
+Schema = mongoose.Schema
+const Product = require('../models/product')
 
-const productOrderSchema = new mongoose.Schema({
-    index: {
-        type: Number
+const productOrderSchema = mongoose.Schema({
+    prodOrder: {
+        type: String,
+        required: true
     },
-    name: {
-        type: Number
+    prodLine: {
+        type: String,
+        required: true
     },
-    piecesInCarton: {
-        type: Number
+    prodDate: {
+        type: String,
+        required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
+    sequence: {//
+        type: Number,
+        required: true
+    },
+    productName: {
+        type: String,
+        required: true
+    },
+    productId: {
+        type: Schema.Types.ObjectId, ref: 'Product',
+        required: true
+    },
+    orderQty: {//
+        type: Number,
+        required: true
+    },
+    orderWeight: {//
+        type: Float,
+        required: true
+    },
+    cartonQty: {//
+        type: Number,
+        required: true
+    },
+    palletQty: {//
+        type: Number,
+        required: true
+    },
+    planProdTime: {//
+        type: String,
+        required: true
+    },
+    planPartStart: {//
+        type: String,
+        required: true
+    },
+    realQty: {
+        type: Number,
+
+    },
+    realProdTime: {
+        type: String
+    },
+    addDate: {//
+        type: String,
+        //default: Date.now
+    },
+    status: {
+        type: String
+    },
+    useOfA: {
+        type: Float
+
+    },
+    useOfB: {
+        type: Float
+
+    },
+    useOfC: {
+        type: Float
+
+    },
+    useOfD: {
+        type: Float
+
     }
+
 })
 
 module.exports = mongoose.model('ProductOrder', productOrderSchema)
